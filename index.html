@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RodSteven Labad | Portfolio</title>
+  <meta name="description" content="Portfolio of RodSteven Labad, a BSIT student and Full-Stack Web & Mobile Developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">RodSteven</a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <i data-lucide="menu" class="icon-open"></i>
+          <i data-lucide="x" class="icon-close"></i>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <i data-lucide="moon" class="theme-icon-dark"></i>
+        <i data-lucide="sun" class="theme-icon-light"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <p class="eyebrow">BSIT Student</p>
+            <h1>RodSteven Labad</h1>
+            <p class="hero-subtitle">Full-Stack Web & Mobile Developer</p>
+            <p class="hero-location">
+              <i data-lucide="map-pin" class="icon-sm"></i> Philippines
+            </p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">View Projects</a>
+              <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="images/profile.jpg" alt="RodSteven Labad" loading="eager" />
+          </div>
+        </div>
+      </div>
+      <div class="hero-blob" aria-hidden="true"></div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-grid">
+          <div class="section-header">
+            <h2 class="section-title">About Me</h2>
+          </div>
+          <div class="section-body">
+            <p>
+              Hello! I'm <strong>RodSteven Labad</strong>, a Bachelor of Science in Information Technology (BSIT) student with a passion for building modern web and mobile applications.
+            </p>
+            <p>
+              I enjoy transforming ideas into functional software by developing both the frontend and backend of applications. My interests include full-stack development, mobile app development, database management, authentication systems, and UI/UX design.
+            </p>
+            <p>
+              I am continuously improving my skills by creating real-world projects, learning new technologies, and exploring software development best practices.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section section-alt">
+      <div class="container">
+        <div class="section-grid">
+          <div class="section-header">
+            <h2 class="section-title">Education</h2>
+          </div>
+          <div class="section-body">
+            <div class="card education-card">
+              <h3>Bachelor of Science in Information Technology (BSIT)</h3>
+              <span class="badge">Currently Studying</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title centered">Technical Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Programming Languages</h3>
+            <ul class="tag-list">
+              <li>PHP</li><li>JavaScript</li><li>Python</li><li>Dart</li><li>Java</li><li>SQL</li><li>HTML5</li><li>CSS3</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Frontend Development</h3>
+            <ul class="tag-list">
+              <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Responsive Web Design</li><li>Flutter UI</li><li>React Native</li><li>Modern UI Implementation</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Backend Development</h3>
+            <ul class="tag-list">
+              <li>PHP</li><li>Laravel</li><li>Django</li><li>REST API Development</li><li>Authentication Systems</li><li>CRUD Applications</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Mobile Development</h3>
+            <ul class="tag-list">
+              <li>Flutter</li><li>React Native</li><li>Expo</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Database</h3>
+            <ul class="tag-list">
+              <li>MySQL</li><li>Firebase Firestore</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Tools & Technologies</h3>
+            <ul class="tag-list">
+              <li>Git</li><li>GitHub</li><li>VS Code</li><li>Android Studio</li><li>XAMPP</li><li>Postman</li><li>Firebase</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <h3>Concepts</h3>
+            <ul class="tag-list">
+              <li>Object-Oriented Programming</li><li>MVC Architecture</li><li>REST APIs</li><li>Database Design</li><li>Authentication & Authorization</li><li>Password Hashing</li><li>Responsive Design</li><li>Version Control</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title centered">Featured Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/capstone.jpg" alt="Blockchain Library Management System" loading="lazy" />
+            </div>
+            <div class="project-header">
+              <h3>Blockchain Library Management System</h3>
+              <span class="badge badge-capstone">Capstone</span>
+            </div>
+            <p class="project-desc">A full-stack library management system that streamlines book borrowing and inventory management.</p>
+            <ul class="feature-list">
+              <li>Admin Dashboard</li>
+              <li>Librarian Dashboard</li>
+              <li>Borrower Dashboard</li>
+              <li>Book Inventory</li>
+              <li>Borrow Request Approval</li>
+              <li>Notifications</li>
+              <li>Receipt Generation</li>
+              <li>Audit Trail</li>
+              <li>User Authentication</li>
+            </ul>
+            <p class="project-tech"><strong>Technologies:</strong> React Native, Firebase, Firestore, JavaScript</p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/cinema-booking.jpg" alt="Cinema Booking Management System" loading="lazy" />
+            </div>
+            <h3>Cinema Booking Management System</h3>
+            <p class="project-desc">A web-based seat reservation system allowing users to reserve cinema seats online.</p>
+            <ul class="feature-list">
+              <li>Movie Scheduling</li>
+              <li>Seat Reservation</li>
+              <li>Booking Management</li>
+              <li>Admin Dashboard</li>
+              <li>Customer Management</li>
+            </ul>
+            <p class="project-tech"><strong>Technologies:</strong> PHP, MySQL, HTML, CSS, JavaScript</p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/secure-auth.png" alt="Secure Authentication System" loading="lazy" />
+            </div>
+            <h3>Secure Authentication System</h3>
+            <p class="project-desc">A secure login system developed for academic purposes demonstrating password security best practices.</p>
+            <ul class="feature-list">
+              <li>Password Hashing</li>
+              <li>User Login</li>
+              <li>Secure Authentication</li>
+              <li>Database Integration</li>
+            </ul>
+            <p class="project-tech"><strong>Technologies:</strong> PHP, MySQL</p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/recipe-finder.png" alt="AI Recipe Finder" loading="lazy" />
+            </div>
+            <h3>AI Recipe Finder</h3>
+            <p class="project-desc">A Flutter mobile application that searches recipes using an external API.</p>
+            <ul class="feature-list">
+              <li>Recipe Search</li>
+              <li>API Integration</li>
+              <li>Modern Mobile UI</li>
+              <li>Responsive Design</li>
+            </ul>
+            <p class="project-tech"><strong>Technologies:</strong> Flutter, Dart, REST API</p>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/cipher-system.jpg" alt="Django Cipher System" loading="lazy" />
+            </div>
+            <h3>Django Cipher System</h3>
+            <p class="project-desc">A Python web application demonstrating encryption and decryption concepts.</p>
+            <p class="project-tech"><strong>Technologies:</strong> Python, Django</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-grid">
+          <div class="section-header">
+            <h2 class="section-title">Experience</h2>
+          </div>
+          <div class="section-body">
+            <div class="card">
+              <h3>Academic Projects</h3>
+              <p>Developed multiple web and mobile applications involving authentication systems, CRUD functionality, database management, and responsive user interfaces.</p>
+              <p>Worked collaboratively on software engineering projects following software development principles and Git version control.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title centered">What I Can Do</h2>
+        <ul class="service-list">
+          <li>Develop Full-Stack Web Applications</li>
+          <li>Build Mobile Applications</li>
+          <li>Design Responsive User Interfaces</li>
+          <li>Create REST APIs</li>
+          <li>Design Databases</li>
+          <li>Implement Authentication Systems</li>
+          <li>Integrate Firebase Services</li>
+          <li>Manage Git Repositories</li>
+          <li>Build CRUD Systems</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="soft-skills" class="section">
+      <div class="container">
+        <h2 class="section-title centered">Soft Skills</h2>
+        <ul class="soft-skill-list">
+          <li>Problem Solving</li>
+          <li>Team Collaboration</li>
+          <li>Communication</li>
+          <li>Time Management</li>
+          <li>Adaptability</li>
+          <li>Continuous Learning</li>
+          <li>Attention to Detail</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="objective" class="section section-alt">
+      <div class="container">
+        <div class="section-grid">
+          <div class="section-header">
+            <h2 class="section-title">Career Objective</h2>
+          </div>
+          <div class="section-body">
+            <p class="lead">I am seeking opportunities to grow as a software developer where I can apply my technical skills, contribute to meaningful projects, and continue learning modern technologies while building high-quality software solutions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title centered">Contact Me</h2>
+        <p class="contact-intro">I look forward to connecting with you and collaborating on exciting projects.</p>
+        <div class="contact-links">
+          <a href="mailto:labadroadsteven@gmail.com" class="contact-link">
+            <i data-lucide="mail"></i>
+            <span>labadroadsteven@gmail.com</span>
+          </a>
+          <a href="https://github.com/rodsteven05" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <i data-lucide="github"></i>
+            <span>github.com/rodsteven05</span>
+          </a>
+          <a href="https://www.linkedin.com/in/roadsteven-labad" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <i data-lucide="linkedin"></i>
+            <span>linkedin.com/in/roadsteven-labad</span>
+          </a>
+          <a href="tel:+639671499209" class="contact-link">
+            <i data-lucide="phone"></i>
+            <span>09671499209</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> RodSteven Labad. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
