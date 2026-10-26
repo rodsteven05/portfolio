@@ -1,86 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Lucide icons
-  if (window.lucide) {
-    lucide.createIcons();
-  }
-
-  // Theme toggle
+  const root = document.documentElement;
   const themeToggle = document.querySelector('.theme-toggle');
-  const storedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  if (storedTheme === 'light' || (!storedTheme && !systemPrefersDark)) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  let savedTheme;
+  try {
+    savedTheme = localStorage.getItem('theme');
+  } catch {
+    // Storage may be disabled; the theme still works for this visit.
   }
-
+  let explicitTheme = savedTheme === 'light' || savedTheme === 'dark';
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    const label = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`;
+    themeToggle.setAttribute('aria-label', label);
+    themeToggle.title = label;
+  }
+  setTheme(explicitTheme ? savedTheme : systemTheme.matches ? 'dark' : 'light');
   themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    if (window.lucide) {
-      lucide.createIcons();
-    }
+    const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    explicitTheme = true;
+    setTheme(theme);
+    try { localStorage.setItem('theme', theme); } catch { /* Keep the in-memory choice. */ }
+  });
+  systemTheme.addEventListener('change', (event) => {
+    if (!explicitTheme) setTheme(event.matches ? 'dark' : 'light');
   });
 
-  // Mobile menu toggle
   const nav = document.querySelector('.nav');
   const navToggle = document.querySelector('.nav-toggle');
-
-  navToggle.addEventListener('click', () => {
-    const expanded = nav.getAttribute('aria-expanded') === 'true';
-    nav.setAttribute('aria-expanded', !expanded);
+  const menu = document.querySelector('.nav-links');
+  const mobile = window.matchMedia('(max-width: 900px)');
+  function setMenu(open, returnFocus = false) {
+    open = mobile.matches && open;
+    nav.dataset.open = String(open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.inert = mobile.matches && !open;
+    if (returnFocus) navToggle.focus();
+  }
+  // Enhance only after handlers/state are available; links remain usable without JS.
+  nav.dataset.enhanced = 'true';
+  setMenu(false);
+  navToggle.addEventListener('click', () => setMenu(nav.dataset.open !== 'true'));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.dataset.open === 'true') setMenu(false, true);
   });
-
-  // Close mobile menu when clicking a link
-  document.querySelectorAll('.nav-links a').forEach((link) => {
+  document.addEventListener('click', (event) => {
+    if (!nav.contains(event.target)) setMenu(false);
+  });
+  nav.addEventListener('focusout', (event) => {
+    if (!nav.contains(event.relatedTarget)) setMenu(false);
+  });
+  mobile.addEventListener('change', () => {
+    const focusInMenu = menu.contains(document.activeElement);
+    setMenu(false, mobile.matches && focusInMenu);
+  });
+  menu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      nav.setAttribute('aria-expanded', 'false');
+      if (mobile.matches) {
+        setMenu(false);
+        const target = document.querySelector(link.hash);
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      }
     });
   });
-
-  // Update footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Active nav link on scroll
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const header = document.querySelector('.header');
+  const links = [...menu.querySelectorAll('a')];
+  const targets = links.map((link) => document.querySelector(link.hash));
+  let scheduled = false;
+  function updateNavigation() {
+    const offset = Math.max(header.getBoundingClientRect().height + 32, parseFloat(getComputedStyle(targets[0]).scrollMarginTop) + 2);
+    let current = -1;
+    targets.forEach((target, index) => {
+      if (target.getBoundingClientRect().top <= offset) current = index;
+    });
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      current = targets.length - 1;
+    }
+    links.forEach((link, index) => {
+      link.classList.toggle('active', index === current);
+      if (index === current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    scheduled = false;
+  }
+  function scheduleNavigation() {
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(updateNavigation);
+    }
+  }
+  window.addEventListener('scroll', scheduleNavigation, { passive: true });
+  window.addEventListener('resize', scheduleNavigation);
+  window.addEventListener('load', scheduleNavigation);
+  updateNavigation();
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-          });
-        }
-      });
-    },
-    { rootMargin: '-40% 0px -55% 0px' }
-  );
-
-  sections.forEach((section) => observer.observe(section));
-
-  // Scroll reveal animations
-  const revealElements = document.querySelectorAll(
-    'section:not(.hero), .project-card, .skill-card, .card, .service-list li, .soft-skill-list li, .contact-link'
-  );
-
-  revealElements.forEach((el) => el.classList.add('reveal'));
-
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
+  // Observe individual cards, never a tall parent section. Content stays visible
+  // without observer support, with reduced motion, or when reached by keyboard.
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if ('IntersectionObserver' in window && !reducedMotion.matches) {
+    const cards = document.querySelectorAll('.project-card, .skill-card, .card, .service-list li, .soft-skill-list li, .contact-link');
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-  );
-
-  revealElements.forEach((el) => revealObserver.observe(el));
+    }, { threshold: 0 });
+    cards.forEach((card) => {
+      card.classList.add('reveal');
+      observer.observe(card);
+    });
+    reducedMotion.addEventListener('change', (event) => {
+      if (event.matches) {
+        observer.disconnect();
+        cards.forEach((card) => card.classList.add('visible'));
+      }
+    });
+  }
 });

@@ -169,15 +169,15 @@ ul {
   transform: rotate(15deg) scale(1.05);
 }
 
-.theme-icon-light {
-  display: none;
-}
-
-[data-theme="light"] .theme-icon-dark {
+.theme-icon-dark {
   display: none;
 }
 
 [data-theme="light"] .theme-icon-light {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon-dark {
   display: block;
 }
 
@@ -189,11 +189,11 @@ ul {
   display: none;
 }
 
-.nav[aria-expanded="true"] .icon-open {
+.nav[data-open="true"] .icon-open {
   display: none;
 }
 
-.nav[aria-expanded="true"] .icon-close {
+.nav[data-open="true"] .icon-close {
   display: block;
 }
 
@@ -741,7 +741,8 @@ ul {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.visible {
+.reveal.visible,
+.reveal:focus-within {
   opacity: 1;
   transform: translateY(0);
 }
@@ -785,13 +786,28 @@ h1, h2, h3 { overflow-wrap: anywhere; }
     border-bottom: 1px solid var(--border);
     padding: 1.5rem;
     gap: 1rem;
-    transform: translateY(-150%);
-    opacity: 0;
-    pointer-events: none;
+    transform: translateY(0);
     transition: transform var(--transition), opacity var(--transition);
   }
 
-  .nav[aria-expanded="true"] .nav-links {
+  .nav[data-enhanced="true"]:not([data-open="true"]) .nav-links {
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav:not([data-enhanced="true"]) .nav-toggle { display: none; }
+  .nav:not([data-enhanced="true"]) .nav-links {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+  .header-inner:has(.nav:not([data-enhanced="true"])) { flex-wrap: wrap; }
+
+  .nav[data-open="true"] .nav-links {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
@@ -855,4 +871,32 @@ h1, h2, h3 { overflow-wrap: anywhere; }
     transform: none;
     transition: none;
   }
+}
+
+/* Navigation offsets and keyboard affordances. */
+:root { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
+[id] { scroll-margin-top: 7rem; }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 5px;
+}
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--primary);
+  border-radius: 0.5rem;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover, .card:hover, .skill-card:hover, .project-card:hover,
+  .project-card:hover .project-image img, .hero-image:hover,
+  .theme-toggle:hover, .service-list li:hover, .soft-skill-list li:hover,
+  .contact-link:hover { transform: none; }
 }
