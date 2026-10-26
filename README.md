@@ -8,7 +8,7 @@ A responsive personal CV website presenting Rodsteven Labad's profile, skills, e
 - **Study period:** 2023–2027
 - **Location:** Panabo City, Davao del Norte, Philippines
 - **Repository:** https://github.com/rodsteven05/portfolio
-- **Live Vercel website:** Pending verification and final deployment. Add the actual production URL before submission.
+- **Live Vercel website:** https://portfolio-phi-ten-zuwpu7ryey.vercel.app/
 
 ## Technologies
 
@@ -82,22 +82,23 @@ These are local checks, not proof of production deployment, physical-device test
 - The display name is Rodsteven Labad. The `roadsteven` spelling in email and platform identifiers is intentional. Verify external links before submission.
 - Confirm all skill claims, project names, descriptions, and screenshots are accurate.
 - Add project repository URLs and live demos where available; do not invent destinations.
-- Add the verified production Vercel URL above after deployment.
+- The owner supplied the Vercel URL above. Confirm public access and production behavior before submission.
 
 ## Deployment and submission checklist
 
-Deployment is pending owner finalization. For this static site, import the repository into Vercel using the **Other** framework preset, repository root, and no build command. If an output-directory override is needed, use `.`. Reuse an existing Vercel project if already connected.
+The owner supplied the live Vercel URL above. For redeployment or recreating this static site, use the **Other** framework preset, repository root, and no build command. If an output-directory override is needed, use `.`. Reuse an existing Vercel project if already connected.
 
 - [x] Add confirmed school, study period, location, and name spelling.
 - [ ] Review remaining public content and confirm current year level if required by the grader.
 - [ ] Confirm GitHub CLI uses `rodsteven05` and Git author identity is correct.
 - [ ] Review and commit documentation/content changes separately.
 - [ ] Push the intended source to the production branch (`main`).
-- [ ] Deploy only after the owner is ready.
+- [x] Owner supplied the deployed Vercel website URL.
 - [ ] Open the production website while signed out and verify public access.
 - [ ] Check navigation, themes, animations, contact/profile links, and images on desktop and mobile.
 - [ ] Confirm the repository is accessible to the grader.
-- [ ] Record the real production Vercel URL in this README and commit that update.
+- [x] Record the owner-supplied Vercel URL in this README.
+- [ ] Commit and push the README URL update.
 - [ ] Submit the Vercel URL and GitHub repository URL in the LMS.
 
 GitHub authentication and Git commit identity are separate. Switch with `gh auth switch --hostname github.com --user rodsteven05`, then verify with `gh api user --jq .login`. If authentication fails, use `gh auth login --hostname github.com --git-protocol https --web` and authorize the intended account. Configure Git authentication with `gh auth setup-git --hostname github.com`. Review `git config user.name` and `git config user.email` independently; use repository-local settings if changes are needed.
